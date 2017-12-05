@@ -1,7 +1,5 @@
 #![cfg_attr(not(feature="std"), no_std)]
 
-#![cfg_attr(asm_available, feature(asm))]
-
 #[cfg(feature="std")]
 extern crate core;
 #[macro_use]

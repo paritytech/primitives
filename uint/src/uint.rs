@@ -83,6 +83,7 @@ macro_rules! uint_overflowing_add {
 		let other_t: &[u64; $n_words] = &$other.0;
 
 		let overflow: u8;
+		#![cfg_attr(asm_available, feature(asm))]
 		unsafe {
 			asm!("
 				add $9, $0
@@ -107,6 +108,7 @@ macro_rules! uint_overflowing_add {
 
 		let overflow: u8;
 
+		#![cfg_attr(asm_available, feature(asm))]
 		unsafe {
 			asm!("
 				add $15, $0
@@ -229,6 +231,7 @@ macro_rules! uint_overflowing_sub {
 		let other_t: &[u64; $n_words] = &$other.0;
 
 		let overflow: u8;
+		#![cfg_attr(asm_available, feature(asm))]
 		unsafe {
 			asm!("
 				sub $9, $0
@@ -252,6 +255,7 @@ macro_rules! uint_overflowing_sub {
 
 		let overflow: u8;
 
+		#![cfg_attr(asm_available, feature(asm))]
 		unsafe {
 			asm!("
 				sub $15, $0
@@ -277,7 +281,7 @@ macro_rules! uint_overflowing_sub {
 			  "={al}"(overflow) /* $0 - $4 */
 
 			: "{rdi}"(&result[4] as *const u64) /* $5 */
-		 	 "{rsi}"(&self_t[4] as *const u64) /* $6 */
+			 "{rsi}"(&self_t[4] as *const u64) /* $6 */
 			  "0"(self_t[0]), "1"(self_t[1]), "2"(self_t[2]), "3"(self_t[3]),
 			  "m"(self_t[4]), "m"(self_t[5]), "m"(self_t[6]), "m"(self_t[7]),
 			  /* $7 - $14 */
@@ -304,6 +308,7 @@ macro_rules! uint_overflowing_mul {
 		let other_t: &[u64; $n_words] = &$other.0;
 
 		let overflow: u64;
+		#![cfg_attr(asm_available, feature(asm))]
 		unsafe {
 			asm!("
 				mov $5, %rax

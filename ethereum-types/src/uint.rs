@@ -10,6 +10,7 @@ impl U256 {
 		let self_t: &[u64; 4] = &self.0;
 		let other_t: &[u64; 4] = &other.0;
 		let mut result: [u64; 8] = unsafe { ::core::mem::uninitialized() };
+		#![cfg_attr(asm_available, feature(asm))]
 		unsafe {
 			asm!("
 				mov $8, %rax
