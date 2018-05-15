@@ -1304,6 +1304,9 @@ macro_rules! impl_std_for_uint {
 		impl ::core::fmt::LowerHex for $name {
 			fn fmt(&self, f: &mut ::core::fmt::Formatter) -> ::core::fmt::Result {
 				let &$name(ref data) = self;
+				if f.alternate() {
+					write!(f, "0x");
+				}
 				// special case.
 				if self.is_zero() {
 					return write!(f, "0");
