@@ -1261,8 +1261,7 @@ macro_rules! impl_std_for_uint {
 	($name: ident, $n_words: tt) => {
 		impl ::core::fmt::Debug for $name {
 			fn fmt(&self, f: &mut ::core::fmt::Formatter) -> ::core::fmt::Result {
-				write!(f, "0x")?;
-				::core::fmt::LowerHex::fmt(self, f)
+				write!(f, "{:#x}", self)
 			}
 		}
 
