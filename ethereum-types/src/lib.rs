@@ -2,8 +2,15 @@
 
 #![cfg_attr(asm_available, feature(asm))]
 
+#![cfg_attr(feature = "alloc", feature(alloc))]
+
 #[cfg(feature="std")]
 extern crate core;
+
+#[cfg(feature = "alloc")]
+#[macro_use] 
+extern crate alloc;
+
 #[macro_use]
 extern crate crunchy;
 #[macro_use]
