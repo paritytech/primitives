@@ -4,6 +4,7 @@
 
 #[cfg(feature="std")]
 extern crate core;
+
 #[macro_use]
 extern crate crunchy;
 #[macro_use]
