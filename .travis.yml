@@ -7,6 +7,8 @@ matrix:
   allow_failures:
     - rust: nightly
 script:
-  - cargo test -p ethereum-types --no-default-features --release
+  - cargo test -p ethereum-types
+  - cargo test -p ethbloom
+  - cargo +nightly test -p no-std-tests
 env:
   - RUST_LOG=quickcheck
