@@ -188,6 +188,7 @@ mod tests {
 				}
 
 				// Invalid examples
+				assert!(ser::from_str::<$name>("\"∀∂\"").unwrap_err().is_data());
 				assert!(ser::from_str::<$name>("\"0x\"").unwrap_err().is_data());
 				assert!(ser::from_str::<$name>("\"0xg\"").unwrap_err().is_data());
 				assert!(ser::from_str::<$name>("\"\"").unwrap_err().is_data());
