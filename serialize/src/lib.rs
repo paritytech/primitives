@@ -86,7 +86,7 @@ pub fn deserialize_check_len<'a, 'de, D>(deserializer: D, len: ExpectedLen<'a>) 
 		}
 
 		fn visit_str<E: de::Error>(self, v: &str) -> Result<Self::Value, E> {
-			if v.len() < 2  || &v[0..2] != "0x" {
+			if !v.starts_with("0x") {
 				return Err(E::custom("prefix is missing"))
 			}
 
@@ -119,7 +119,7 @@ pub fn deserialize_check_len<'a, 'de, D>(deserializer: D, len: ExpectedLen<'a>) 
 						continue
 					}
 					_ => {
-						let ch = v[idx..].chars().next().unwrap();
+						let ch = v.bytes().skip(idx).next().unwrap() as char;
 						return Err(E::custom(&format!("invalid hex character: {}, at {}", ch, idx)))
 					}
 				}
