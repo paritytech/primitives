@@ -7,7 +7,7 @@ extern crate rand;
 extern crate crunchy;
 
 use test::{Bencher, black_box};
-use rand::Rng;
+use rand::RngCore;
 
 fn random_data() -> [u8; 256] {
 	let mut res = [0u8; 256];
