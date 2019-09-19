@@ -73,6 +73,12 @@ impl From<U512> for U256 {
 	}
 }
 
+impl From<u128> for U256 {
+    fn from(value: u128) -> U256 {
+        U256::from_big_endian(&value.to_be_bytes())
+    }
+}
+
 impl<'a> From<&'a U256> for U512 {
 	fn from(value: &'a U256) -> U512 {
 		let U256(ref arr) = *value;
@@ -324,5 +330,24 @@ mod tests {
 
 		let result = U256([1, 2, 3, 4]).full_mul(U256([5, 6, 7, 8]));
 		assert_eq!(U512([5, 16, 34, 60, 61, 52, 32, 0]), result);
+	}
+
+	#[test]
+	fn test_u128_to_u256() {
+		assert_eq!(
+			U256::from(u128::max_value()),
+			U256::from_dec_str("340282366920938463463374607431768211455").unwrap(),
+			"failed on 128::max_value()"
+		);
+		assert_eq!(
+			U256::from(1 as u128),
+			U256::from(1),
+			"failed on U256::from(1 as u128)"
+		);
+		assert_eq!(
+			U256::from(0 as u128),
+			U256::from(0),
+			"failed on U256::from(0 as u128)"
+		);
 	}
 }
